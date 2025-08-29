@@ -1,4 +1,3 @@
-
 import sqlite3
 
 
@@ -39,6 +38,7 @@ add_user("user3", 22)
 add_user("user4", 33)
 
 
+
 def add_grade(user_id, subject, grade):
     cursor.execute(
         'INSERT INTO grades(userid, subject, grade) VALUES (?,?,?)',
@@ -46,6 +46,7 @@ def add_grade(user_id, subject, grade):
     )
     connect.commit()
     print("Оценка за урок добавлена!!")
+
 
 
 def get_user_and_grade():
@@ -58,7 +59,11 @@ def get_user_and_grade():
     for i in users:
         print(f"name: {i[0]}, subject: {i[1]}, grade: {i[2]}")
 
-
+# add_grade(0,"math", 5)
+# add_grade(1,"math", 5)
+add_grade(2,"math", 5)
+add_grade(3,"physics", 4)
+add_grade(4,"programming", 2)
 
 def create_view_test():
     cursor.execute('''
@@ -78,7 +83,7 @@ def get_user_age_19():
 
 # get_user_age_19()
 
-def create_my_view():
+def users_and_grades():
     cursor.execute('''
         CREATE VIEW IF NOT EXISTS my_view AS
         SELECT users.name, users.age, grades.subject, grades.grade
@@ -94,3 +99,6 @@ def get_from_view():
     cursor.execute("SELECT * FROM my_view")
     for row in cursor.fetchall():
         print(row)
+
+users_and_grades()
+get_from_view()
